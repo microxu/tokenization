@@ -1,0 +1,29 @@
+
+
+server:
+  port: 3000
+
+spring:
+  application:
+    name: tokenization
+  datasource:
+    url: jdbc:h2:mem:tokendb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: true
+      path: /h2
+
+token:
+  store:
+    type: jpa
+    retry:
+      max-attempts: 5
+  generator:
+    length: 32
+
+
