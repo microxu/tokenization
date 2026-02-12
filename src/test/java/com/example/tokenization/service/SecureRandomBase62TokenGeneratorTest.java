@@ -20,6 +20,7 @@ class SecureRandomBase62TokenGeneratorTest {
     //THEN
     assertNotNull(token);
     assertEquals(length, token.length());
+    assertTrue(token.matches("^[0-9A-Za-z]{32}$"));
   }
 
   @Test

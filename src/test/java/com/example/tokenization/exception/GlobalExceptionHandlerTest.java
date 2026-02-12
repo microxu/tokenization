@@ -11,7 +11,7 @@ class GlobalExceptionHandlerTest {
   private final GlobalExceptionHandler handler = new GlobalExceptionHandler();
 
   @Test
-  void handleTokenizationException_returns503AndStandardBody() {
+  void handleTokenizationException() {
     var resp = handler.handleStoreUnavailable(new TokenizationException("token generating error", 500));
 
     assertEquals(500, resp.getStatusCode().value());
@@ -20,7 +20,7 @@ class GlobalExceptionHandlerTest {
   }
 
   @Test
-  void handleDeTokenizationException_returns503AndStandardBody() {
+  void handleDeTokenizationException() {
     var resp = handler.handleStoreUnavailable(new DeTokenException("detoken generating error", 500));
 
     assertEquals(500, resp.getStatusCode().value());
@@ -29,7 +29,7 @@ class GlobalExceptionHandlerTest {
   }
 
   @Test
-  void handleDataAccess_returns503AndDatabaseError() {
+  void handleDataAccessError() {
     var resp = handler.handleDataAccess(new DataAccessResourceFailureException("db down"));
 
     assertEquals(HttpStatus.SERVICE_UNAVAILABLE, resp.getStatusCode());

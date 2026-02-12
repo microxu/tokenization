@@ -71,7 +71,16 @@ public class JpaTokenStore implements TokenStore {
         log.debug("Token collision or integrity violation, retrying (attempt {})", i + 1);
       }
     }
-    log.warn("Failed to generate unique token for account {} after {} retries", accountNumber, maxRetries);
+
+    log.warn(
+        "Failed to generate unique token for account {} after {} retries",
+        String.format("%4s",
+            accountNumber.length() <= 4
+                ? accountNumber
+                : accountNumber.substring(accountNumber.length() - 4)
+        ).replace(' ', '*'),
+        maxRetries
+    );
 
     throw new TokenizationException(String.format("Unable to create unique token for account %s after retries", accountNumber)
         ,HttpStatus.INTERNAL_SERVER_ERROR.value());
